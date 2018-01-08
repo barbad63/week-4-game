@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Crystals</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 bg-primary">
+				<p>CrystalsCollector!</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 bg-warning">
+				<p>Crystal game verbiage which I did not read and. It has to do with instructions of the game I am sure</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 bg-success" style="height: 100px;">
+				<h2 id="ranID">36</h2>
+			</div>
+			<div class="col-md-3 bg-info" style="height: 100px;">
+				<p id="wlID"></p>
+				<p id="winID">Wins:</p>	
+				<p id="lossID">Losses:</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+  	  <div class="row">
+        <div class="col-sm-4">
+
+                    <button id="button-1" class="btn btn-primary number" value="1"><h1>1</h1></button>
+                    <button id="button-2" class="btn btn-primary number" value="2"><h1>2</h1></button>
+                    <button id="button-3" class="btn btn-primary number" value="3"><h1>3</h1></button>
+                    <button id="button-4" class="btn btn-primary number" value="4"><h1>4</h1></button>
+
+        </div>
+      </div>
+    </div>
+	<div class="container">	
+		<div class="row">
+			<div class="col-md-3 bg-success">
+				<p>Your current score is:</p>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 bg-primary">
+				<h2 id="tot">0</h2>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+var game = {
+	firstRun: true,
+	ranNmbr: 36, //between 19 and 120
+	guessNmbr: 0,
+	curScore: 0,
+	winCnt: 0,
+	lossCnt: 0,
+	crystals: {
+		diamond: {
+			value: 1 //between 1 and 12
+		},
+		ruby: {
+			value: 2
+		},
+		emerald: {
+			value: 3
+		},
+		jonquil: {
+			value: 4
+		}
+	},
+	init: function(){
+		this.ranNmbr = Math.floor(Math.random() * ((120-19)+1) + 19);
+		$("h2#ranID").html(this.ranNmbr);
+		this.crystals.ruby.value = Math.floor(Math.random() * ((12-1)+1) + 1);
+		this.crystals.diamond.value = Math.floor(Math.random() * ((12-1)+1) + 1);
+		this.crystals.jonquil.value = Math.floor(Math.random() * ((12-1)+1) + 1);
+		this.crystals.emerald.value = Math.floor(Math.random() * ((12-1)+1) + 1);
+		this.curScore = 0;
+		$("h2#tot").html(this.curScore); 
+	},
+	getCrysVal: function(bv){
+		var rbv = 0;
+		switch(bv) {
+			case 1:
+				rbv = this.crystals.ruby.value;
+				break;
+			case 2:
+				rbv = this.crystals.diamond.value;
+				break;
+			case 3:
+				rbv = this.crystals.jonquil.value;
+				break;
+			case 4:
+				rbv = this.crystals.emerald.value;
+				break;
+			default:
+				rbv = 0;
+		}
+		return(rbv);
+	},
+	totDisplay: function(av){
+		this.curScore += av;
+		var totalScore = this.curScore;
+		console.log("The total current score is: " + totalScore);
+		$("h2#tot").html(totalScore); 
+	},
+	chkWinLose: function(){
+		if (this.curScore > this.ranNmbr){
+			this.lossCnt++;
+			$("p#lossID").html("Losses: " + this.lossCnt);
+			$("p#wlID").html("You lose!");
+			return(true);
+		} else if (this.curScore === this.ranNmbr){
+			this.winCnt++;
+			$("p#winID").html("Wins: " + this.winCnt);
+			$("p#wlID").html("You win!!!")
+			return(true);
+		} else {
+			return(false);
+		}
+	}
+}
+
+game.init();
+$(document).ready(function(){
+	$(".btn-primary").click(function(){
+		var btnVal = parseInt($(this).attr("value"));
+		console.log("The crystal button pushed is: " + btnVal);
+		var crysVal = game.getCrysVal(btnVal);
+		console.log("The crystal value is: " + crysVal)
+		game.totDisplay(crysVal);
+		if (game.chkWinLose() === true) {
+			game.init();
+		}
+		});
+});
+
+
+
+</script>
+</body>
+</html>
+
+<!-- $("#first-number,#second-num".....oper,res).empty();
+is the operator chosen
+first number
+else second number
+parseInt casts into integer
+Math.pow 
+$(".clear").on("click", InitializeCalculator); do not use function parens()
+
+var imgobj = $("<img src="">")
+
+imgobj.css("float", "left")
+or
+imgobj.css({
+	float: left,
+	border: 1px solid black
+}); -->
