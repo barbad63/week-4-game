@@ -6,18 +6,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-image: url(assets/images/circles-dark.png)">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4 bg-primary">
-				<p>CrystalsCollector!</p>
+			<div class="col-md-4 bg-primary" style="background-color: rgb(244, 149, 66); width: 310px;">
+				<h1>CrystalsCollector!</h1>
 			</div>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 bg-warning">
-				<p>Crystal game verbiage which I did not read and. It has to do with instructions of the game I am sure</p>
+			<div class="col-md-6" style="background-color: rgb(255, 236, 209); height: 320px;">
+				<p class="font-weight-bold">You will be given a random number at the start of the game.</p><br>
+				<p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.</p><br>
+				<p>You win the game by matching your total score to random number, you lose the game if your total score goes above the random number.</p><br>
+				<p>The value of each crystal is hidden from you until you click on it.</p><br>
+				<p>Each time when the game starts, the game will change the values of each crystal</p>
 			</div>
 		</div>
 	</div>
@@ -35,12 +39,11 @@
 	</div>
 	<div class="container">
   	  <div class="row">
-        <div class="col-sm-4">
-
-                    <button id="button-1" class="btn btn-primary number" value="1"><h1>1</h1></button>
-                    <button id="button-2" class="btn btn-primary number" value="2"><h1>2</h1></button>
-                    <button id="button-3" class="btn btn-primary number" value="3"><h1>3</h1></button>
-                    <button id="button-4" class="btn btn-primary number" value="4"><h1>4</h1></button>
+        <div class="col-sm-5">
+        			<img src="assets/images/ruby_gemstone.jpeg" value="1" style="width: 100px; height: 100px;">
+					<img src="assets/images/diamond.png" value="2" style="width: 100px; height: 100px;"> 
+                    <img src="assets/images/janquil.jpeg" value="3" style="width: 100px; height: 100px;">
+                    <img src="assets/images/emerald.jpeg" value="4" style="width: 100px; height: 100px;">
 
         </div>
       </div>
@@ -137,7 +140,7 @@ var game = {
 
 game.init();
 $(document).ready(function(){
-	$(".btn-primary").click(function(){
+	$("img").click(function(){
 		var btnVal = parseInt($(this).attr("value"));
 		console.log("The crystal button pushed is: " + btnVal);
 		var crysVal = game.getCrysVal(btnVal);
@@ -154,20 +157,3 @@ $(document).ready(function(){
 </script>
 </body>
 </html>
-
-<!-- $("#first-number,#second-num".....oper,res).empty();
-is the operator chosen
-first number
-else second number
-parseInt casts into integer
-Math.pow 
-$(".clear").on("click", InitializeCalculator); do not use function parens()
-
-var imgobj = $("<img src="">")
-
-imgobj.css("float", "left")
-or
-imgobj.css({
-	float: left,
-	border: 1px solid black
-}); -->
